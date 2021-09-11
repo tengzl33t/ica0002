@@ -1,8 +1,9 @@
 - name: Install nginx
   apt:
     name: nginx
+    update_cache: yes
 
-- name: CChange nginx main page
+- name: Change nginx main page
   ansible.builtin.copy:
-    src: /nginx/files/index.html
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/nginx/files/index.html
     dest: /var/www/html/index.html
