@@ -1,0 +1,8 @@
+- name: Install nginx
+  apt:
+    name: nginx
+
+- name: CChange nginx main page
+  ansible.builtin.copy:
+    src: /nginx/files/index.html
+    dest: /var/www/html/index.html

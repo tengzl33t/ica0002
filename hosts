@@ -1,1 +1,4 @@
 remote ansible_host=193.40.156.86 ansible_port=17422 ansible_ssh_user=ubuntu
+
+[web_servers]
+remote
