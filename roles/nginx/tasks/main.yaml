@@ -1,7 +1,6 @@
 - name: Install nginx
   apt:
     name: nginx
-    update_cache: yes
 
 - name: Change nginx main page
   ansible.builtin.copy:

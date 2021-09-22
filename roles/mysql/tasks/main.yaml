@@ -1,0 +1,33 @@
+- name: Install mysql
+  apt:
+    name: mysql-server
+
+- name: Install pymysql
+  apt:
+    name: python3-pymysql
+
+- name: Start and enable mysql
+  ansible.builtin.service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Change mysql config
+  ansible.builtin.copy:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/mysql/files/override.cnf
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify:
+    - Restart mysql
+
+- name: MySQL database
+  community.mysql.mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: MySQL user
+  community.mysql.mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    host: "%"
+    priv: "{{ mysql_database }}.*:ALL"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
