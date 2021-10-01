@@ -1,0 +1,18 @@
+acl lannets {
+    {% for ip in query_allow %}{{ ip }};
+    {% endfor %}
+};
+
+options {
+        directory "/var/cache/bind";
+
+        forwarders {
+            {% for ip in forwarders %}{{ ip }};
+            {% endfor %}
+        };
+
+        allow-query { 
+            lannets;
+        };
+        dnssec-validation no;
+};

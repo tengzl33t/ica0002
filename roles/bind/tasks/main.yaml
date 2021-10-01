@@ -1,0 +1,29 @@
+- name: Install bind9
+  apt:
+    name: bind9
+
+- name: Start and enable bind9
+  ansible.builtin.service:
+    name: bind9
+    state: started
+    enabled: yes
+
+- name: Change bind9 "named.conf.options" config
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/named.conf.options.j2
+    dest: /etc/bind/named.conf.options
+  notify:
+    - Restart bind
+
+- name: Change bind9 "db.sus" config
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/db.sus.j2
+    dest: /var/cache/bind/db.sus
+
+- name: Change bind9 "named.conf.local" config
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/named.conf.local.j2
+    dest: /etc/bind/named.conf.local
+  notify:
+    - Restart bind
+

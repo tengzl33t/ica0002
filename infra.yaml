@@ -1,15 +1,20 @@
 - name: Init
-  hosts: web_servers:db_servers
+  hosts: all
   become: yes
   roles:
     - init
-
 
 - name: Database server
   hosts: db_servers
   become: yes
   roles:
     - mysql
+
+- name: DNS server
+  hosts: db_servers
+  become: yes
+  roles:
+    - bind
 
 - name: Web server
   hosts: web_servers

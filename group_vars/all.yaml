@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.32
+mysql_host: "{{ hostvars['remote2']['ansible_default_ipv4']['address'] }}"
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -8,3 +8,14 @@ mysql_password: !vault |
           33386461393831323465323065336234366662396431626439313661643431306333623230333536
           3935353732373764340a666466316465323230386331616635376130316637393938386139366532
           3065
+
+forwarders: 
+  - 1.1.1.1
+  - 8.8.8.8
+  - 9.9.9.9
+  - 9.9.9.10
+
+query_allow:
+  - 192.168.42.0/24
+  - 127.0.0.0/8
+

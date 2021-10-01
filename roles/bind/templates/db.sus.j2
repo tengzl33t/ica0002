@@ -1,0 +1,11 @@
+$TTL	604800
+sus.eu.	IN	SOA	vm2.sus.eu. random.sus.eu. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+sus.eu.	IN	NS	vm2
+vm1	IN	A	{{ hostvars['remote1']['ansible_default_ipv4']['address'] }}
+vm2	IN	A	{{ hostvars['remote2']['ansible_default_ipv4']['address'] }}
