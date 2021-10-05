@@ -1,0 +1,23 @@
+- name: Install prometheus
+  apt:
+    name: prometheus
+
+- name: Start and enable prometheus
+  ansible.builtin.service:
+    name: prometheus
+    state: started
+    enabled: yes
+
+- name: Add prometheus ARGS
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/prometheus/templates/prometheus
+    dest: /etc/default/prometheus
+  notify:
+    - Restart prometheus
+
+- name: Add prometheus yml
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/prometheus/templates/prometheus.yml.j2
+    dest: /etc/prometheus/prometheus.yml
+  notify:
+    - Restart prometheus

@@ -1,11 +1,14 @@
 $TTL	604800
-sus.eu.	IN	SOA	vm2.sus.eu. random.sus.eu. (
+{{startup_name}}.	IN	SOA	remote2.{{startup_name}}. random.{{startup_name}}. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-sus.eu.	IN	NS	vm2
-vm1	IN	A	{{ hostvars['remote1']['ansible_default_ipv4']['address'] }}
-vm2	IN	A	{{ hostvars['remote2']['ansible_default_ipv4']['address'] }}
+{% for vm in groups['dns_servers'] %}
+{{startup_name}}.	IN	NS	{{vm}}
+{% endfor %}
+{% for vm in groups['all'] %}
+{{ vm }} IN A {{ hostvars[vm]['ansible_default_ipv4']['address'] }}
+{% endfor %}
