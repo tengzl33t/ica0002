@@ -17,6 +17,7 @@ query_allow:
   - 192.168.42.0/24
   - 127.0.0.0/8
 
-startup_name: sus.eu
+domain: sus
+tld: eu
 
 public_ip: 193.40.156.86

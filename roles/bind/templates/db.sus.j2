@@ -1,5 +1,5 @@
 $TTL	604800
-{{startup_name}}.	IN	SOA	remote2.{{startup_name}}. random.{{startup_name}}. (
+{{domain}}.{{tld}}.	IN	SOA	remote2.{{domain}}.{{tld}}. random.{{domain}}.{{tld}}. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
@@ -7,7 +7,7 @@ $TTL	604800
 			 604800 )	; Negative Cache TTL
 ;
 {% for vm in groups['dns_servers'] %}
-{{startup_name}}.	IN	NS	{{vm}}
+{{domain}}.{{tld}}.	IN	NS	{{vm}}
 {% endfor %}
 {% for vm in groups['all'] %}
 {{ vm }} IN A {{ hostvars[vm]['ansible_default_ipv4']['address'] }}
