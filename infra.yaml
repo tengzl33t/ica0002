@@ -11,13 +11,6 @@
     - mysql
     - bind
 
-- name: All
-  hosts: all
-  become: yes
-  roles:
-    - node_exporter
-    - resolv
-
 - name: Web server
   hosts: web_servers
   become: yes
@@ -26,3 +19,10 @@
     - uwsgi
     - nginx
     - prometheus
+
+- name: All
+  hosts: all
+  become: yes
+  roles:
+    - node_exporter
+    - resolv
