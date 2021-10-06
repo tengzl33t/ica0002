@@ -19,11 +19,7 @@
   ansible.builtin.template:
     src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/db.sus.j2
     dest: /var/cache/bind/db.sus
-<<<<<<< HEAD
   notify:
-=======
-    notify:
->>>>>>> 0ce7e493b3502adad0a16ffb611b74981814de65
     - Restart rndc
 
 

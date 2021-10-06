@@ -1,10 +1,5 @@
-<<<<<<< HEAD
 remote1 ansible_host=193.40.156.86 ansible_port=18722 ansible_ssh_user=ubuntu
 remote2 ansible_host=193.40.156.86 ansible_port=8222 ansible_ssh_user=ubuntu
-=======
-remote1 ansible_host=193.40.156.86 ansible_port=16822 ansible_ssh_user=ubuntu
-remote2 ansible_host=193.40.156.86 ansible_port=5722 ansible_ssh_user=ubuntu
->>>>>>> 0ce7e493b3502adad0a16ffb611b74981814de65
 
 [web_servers]
 remote1
