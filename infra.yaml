@@ -1,8 +1,11 @@
-- name: Init
+- name: All
   hosts: all
   become: yes
   roles:
     - init
+    - node_exporter
+    - nginx
+    - resolv
 
 - name: Database/DNS server
   hosts: db_servers
@@ -10,6 +13,7 @@
   roles:
     - mysql
     - bind
+<<<<<<< HEAD
 
 - name: All
   hosts: all
@@ -17,6 +21,8 @@
   roles:
     - node_exporter
     - resolv
+=======
+>>>>>>> 0ce7e493b3502adad0a16ffb611b74981814de65
 
 - name: Web server
   hosts: web_servers
