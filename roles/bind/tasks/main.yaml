@@ -19,6 +19,9 @@
   ansible.builtin.template:
     src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/db.sus.j2
     dest: /var/cache/bind/db.sus
+  notify:
+    - Restart rndc
+
 
 - name: Change bind9 "named.conf.local" config
   ansible.builtin.template:
@@ -26,14 +29,3 @@
     dest: /etc/bind/named.conf.local
   notify:
     - Restart bind
-
-- name: Stop and disable resolv
-  ansible.builtin.service:
-    name: systemd-resolved
-    state: stopped
-    enabled: no
-
-- name: Change resolv config
-  ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/resolv.conf.j2
-    dest: /etc/resolv.conf
