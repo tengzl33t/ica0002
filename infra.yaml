@@ -17,7 +17,6 @@
   roles:
     - agama
     - uwsgi
-    - nginx
     - prometheus
 
 - name: All
@@ -25,4 +24,5 @@
   become: yes
   roles:
     - node_exporter
+    - nginx
     - resolv
