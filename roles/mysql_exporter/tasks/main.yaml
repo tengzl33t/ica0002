@@ -1,0 +1,19 @@
+- name: Install mysql exporter
+  apt:
+    name: prometheus-mysqld-exporter
+
+- name: MySQL user for mysql exporter
+  community.mysql.mysql_user:
+    name: "{{ mysql_exporter_user }}"
+    password: "{{ mysql_exporter_password }}"
+    host: "%"
+    priv: 
+      '*.*': 'PROCESS,REPLICATION CLIENT,SELECT'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Change mysql config
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/mysql_exporter/templates/my.cnf.j2
+    dest: /var/lib/prometheus/.my.cnf
+  notify:
+    - Restart mysql exporter

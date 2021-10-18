@@ -1,0 +1,5 @@
+rate(go_memstats_alloc_bytes_total[10m])
+rate(node_cpu_seconds_total[5m])
+sort(node_load1)
+minute()
+abs(go_gc_duration_seconds)

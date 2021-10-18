@@ -14,6 +14,13 @@
   notify:
     - Restart nginx
 
+- name: Change nginx config for exporter
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/nginx/templates/exporter.j2
+    dest: /etc/nginx/sites-enabled/exporter
+  notify:
+    - Restart nginx
+
 - name: Start and enable nginx
   ansible.builtin.service:
     name: nginx

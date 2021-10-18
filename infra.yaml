@@ -26,3 +26,12 @@
     - node_exporter
     - nginx
     - resolv
+    - nginx_exporter
+
+- name: Database/DNS server
+  hosts: db_servers
+  become: yes
+  roles:
+    - mysql_exporter
+    - bind_exporter
+    - grafana
