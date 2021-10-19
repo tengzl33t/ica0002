@@ -1,7 +1,3 @@
-- name: Install dependencies
-  apt: 
-      name: apt-transport-https
-
 - name: add grafana gpg key
   ansible.builtin.apt_key:
     url: https://packages.grafana.com/gpg.key
@@ -26,3 +22,28 @@
     dest: /etc/grafana/grafana.ini
   notify:
     - Restart grafana
+
+- name: Change admin password
+  shell: "grafana-cli admin reset-admin-password {{grafana_admin_password}}"
+  notify:
+    - Restart grafana
+
+- name: Configure Prometheus as default datasource
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/prometheus_ds.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/prometheus.yaml
+  notify:
+    - Restart grafana
+
+- name: Configuration dashboards
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/dashboards.yaml.j2
+    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
+  notify:
+    - Restart grafana
+
+- name: Setup dashboards
+  ansible.builtin.copy:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/files/main.json
+    dest: /etc/grafana/provisioning/dashboards/main.json
+  notify: Restart grafana

@@ -2,6 +2,12 @@
   apt:
     name: prometheus-mysqld-exporter
 
+- name: Start and enable mysql exporter
+  ansible.builtin.service:
+    name: prometheus-mysqld-exporter
+    state: started
+    enabled: yes
+
 - name: MySQL user for mysql exporter
   community.mysql.mysql_user:
     name: "{{ mysql_exporter_user }}"

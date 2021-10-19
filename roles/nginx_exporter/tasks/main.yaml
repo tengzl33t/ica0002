@@ -1,3 +1,9 @@
 - name: Install nginx exporter
   apt:
     name: prometheus-nginx-exporter
+
+- name: Start and enable nginx exporter
+  ansible.builtin.service:
+    name: prometheus-nginx-exporter
+    state: started
+    enabled: yes

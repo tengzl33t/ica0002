@@ -10,7 +10,7 @@ server {
 	}
 	{% endif %}
 
-	location = /nginx-metrics {
+	location /nginx-metrics {
 		proxy_pass http://localhost:9113/metrics;
 	}
 
@@ -22,11 +22,11 @@ server {
 		proxy_pass http://localhost:9119/metrics;
 	}
 
-	location = /grafana {
+	location /grafana {
 		proxy_pass http://localhost:3000;
 	}
 
-	location = /mysql-metrics {
+	location /mysql-metrics {
 		proxy_pass http://localhost:9104/metrics;
 	}
 	{% endif %}

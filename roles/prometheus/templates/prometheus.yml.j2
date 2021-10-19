@@ -15,3 +15,17 @@ scrape_configs:
       - targets:
         {% for machine in groups['all'] %}- {{ machine }}:9100
         {% endfor %}
+
+  - job_name: 'nginx'
+    static_configs:
+      - targets:
+        {% for machine in groups['all'] %}- {{ machine }}:9113
+        {% endfor %}
+
+  - job_name: 'bind9'
+    static_configs:
+      - targets: ['remote2:9119']
+
+  - job_name: 'mysql'
+    static_configs:
+      - targets: ['remote2:9104']
