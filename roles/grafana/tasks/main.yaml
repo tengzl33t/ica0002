@@ -24,7 +24,7 @@
     - Restart grafana
 
 - name: Change admin password
-  shell: "grafana-cli admin reset-admin-password {{grafana_admin_password}}"
+  shell: grafana-cli admin reset-admin-password {{grafana_admin_password}}
   notify:
     - Restart grafana
 
