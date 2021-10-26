@@ -1,0 +1,6 @@
+- name: Copy pinger service file
+  ansible.builtin.copy:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/rsyslog/files/10-telegraf.conf
+    dest: /etc/rsyslog.d/10-telegraf.conf
+  notify:
+    - Restart rsyslog

@@ -1,0 +1,9 @@
+apiVersion: 1
+
+datasources:
+  - name: InfluxDB-Latency
+    type: influxdb
+    access: proxy
+    url: http://remote2:8086
+    isDefault: False
+    database: latency

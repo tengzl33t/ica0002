@@ -27,6 +27,7 @@
     - nginx
     - resolv
     - nginx_exporter
+    - rsyslog
 
 - name: Database/DNS server
   hosts: db_servers
@@ -35,3 +36,6 @@
     - mysql_exporter
     - bind_exporter
     - grafana
+    - influxdb
+    - pinger
+    - influxdb_exporter

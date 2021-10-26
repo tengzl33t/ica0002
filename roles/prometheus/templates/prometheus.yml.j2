@@ -29,3 +29,7 @@ scrape_configs:
   - job_name: 'mysql'
     static_configs:
       - targets: ['remote2:9104']
+  
+  - job_name: 'influxdb'
+    static_configs:
+      - targets: ['remote2:9424']

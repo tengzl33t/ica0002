@@ -26,6 +26,10 @@ server {
 		proxy_pass http://localhost:3000;
 	}
 
+	location /influxdb-metrics {
+		proxy_pass http://localhost:9424/metrics;
+	}
+
 	location /mysql-metrics {
 		proxy_pass http://localhost:9104/metrics;
 	}

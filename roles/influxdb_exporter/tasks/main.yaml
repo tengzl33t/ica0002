@@ -1,0 +1,19 @@
+- name: Copy influx exporter binary
+  ansible.builtin.copy:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/influxdb_exporter/files/influx_stats_exporter_linux_amd64
+    dest: /usr/local/bin/influx_stats_exporter_linux_amd64
+    mode: a+x
+
+- name: Copy influx exporter service file
+  ansible.builtin.copy:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/influxdb_exporter/files/influx_exporter.service
+    dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
+    mode: a+x
+  notify:
+    - Reload systemd
+
+- name: Start and enable pinger
+  ansible.builtin.service:
+    name: prometheus-influxdb-stats-exporter
+    state: started
+    enabled: yes

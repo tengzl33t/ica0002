@@ -1,0 +1,39 @@
+- name: add influxdb gpg key
+  ansible.builtin.apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+
+- name: add influxdb rep
+  ansible.builtin.apt_repository:
+    repo: deb https://repos.influxdata.com/ubuntu focal stable
+
+- name: Install influxdb
+  apt:
+    name: influxdb
+
+- name: Start and enable influxdb
+  ansible.builtin.service:
+    name: influxdb
+    state: started
+    enabled: yes
+
+- name: Copy new influx config
+  ansible.builtin.copy:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/influxdb/files/influxdb.conf
+    dest: /etc/influxdb/influxdb.conf
+  notify: Restart influxdb
+
+- name: Install telegraf
+  apt:
+    name: telegraf
+
+- name: Start and enable telegraf
+  ansible.builtin.service:
+    name: telegraf
+    state: started
+    enabled: yes
+
+- name: Copy new telegraph config
+  ansible.builtin.copy:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/influxdb/files/telegraf.conf
+    dest: /etc/telegraf/telegraf.conf
+  notify: Restart telegraf

@@ -1,0 +1,5 @@
+- name: Reload systemd
+  ansible.builtin.systemd:
+    name: prometheus-influxdb-stats-exporter
+    state: restarted
+    daemon_reload: yes

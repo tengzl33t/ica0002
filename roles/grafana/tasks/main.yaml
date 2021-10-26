@@ -23,15 +23,37 @@
   notify:
     - Restart grafana
 
+- name: Pause for 10 seconds
+  pause:
+    seconds: 10
+
 - name: Change admin password
   shell: grafana-cli admin reset-admin-password {{grafana_admin_password}}
   notify:
     - Restart grafana
 
+- name: Pause for 10 seconds
+  pause:
+    seconds: 10
+
 - name: Configure Prometheus as default datasource
   ansible.builtin.template:
     src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/prometheus_ds.yaml.j2
     dest: /etc/grafana/provisioning/datasources/prometheus.yaml
+  notify:
+    - Restart grafana
+
+- name: Configure Influx-Telegraf datasource
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/influx_telegraf_ds.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/influx_telegraf_ds.yaml
+  notify:
+    - Restart grafana
+
+- name: Configure Influx-Latency datasource
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/influx_latency_ds.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/influx_latency_ds.yaml
   notify:
     - Restart grafana
 
@@ -42,8 +64,19 @@
   notify:
     - Restart grafana
 
-- name: Setup dashboards
+- name: Pause for 10 seconds
+  pause:
+    seconds: 10
+
+- name: Setup main dashboard
   ansible.builtin.copy:
     src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/files/main.json
     dest: /etc/grafana/provisioning/dashboards/main.json
   notify: Restart grafana
+
+- name: Configure Influx-Telegraf dash
+  ansible.builtin.copy:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/files/syslog.json
+    dest: /etc/grafana/provisioning/dashboards/syslog.json
+  notify:
+    - Restart grafana
