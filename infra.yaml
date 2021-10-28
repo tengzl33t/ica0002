@@ -28,6 +28,7 @@
     - resolv
     - nginx_exporter
     - rsyslog
+    - backup
 
 - name: Database/DNS server
   hosts: db_servers

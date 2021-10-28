@@ -25,7 +25,7 @@
 
 - name: Pause for 10 seconds
   pause:
-    seconds: 10
+    seconds: 20
 
 - name: Change admin password
   shell: grafana-cli admin reset-admin-password {{grafana_admin_password}}
