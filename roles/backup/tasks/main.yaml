@@ -7,3 +7,20 @@
     generate_ssh_key: yes
     ssh_key_bits: 2048
     ssh_key_file: .ssh/id_rsa
+
+- name: Create restore directory
+  ansible.builtin.file:
+    path: /home/backup/restore
+    state: directory
+    mode: '0755'
+    owner: backup
+
+- name: Install duplicity
+  apt:
+    name: duplicity
+
+- name: Copy pinger config
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/backup/templates/known_hosts.j2
+    dest: /home/backup/.ssh/known_hosts
+    owner: backup

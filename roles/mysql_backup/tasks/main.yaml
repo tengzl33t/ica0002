@@ -1,0 +1,6 @@
+- name: Create mysql backup directory
+  ansible.builtin.file:
+    path: /home/backup/mysql
+    state: directory
+    mode: '0755'
+    owner: backup

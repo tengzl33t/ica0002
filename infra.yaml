@@ -40,3 +40,5 @@
     - influxdb
     - pinger
     - influxdb_exporter
+    - mysql_backup
+    - influxdb_backup
