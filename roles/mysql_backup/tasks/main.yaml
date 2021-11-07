@@ -4,3 +4,9 @@
     state: directory
     mode: '0755'
     owner: backup
+
+- name: Copy crontab file
+  ansible.builtin.templates:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/mysql_backup/files/mysql-backup.j2
+    dest: /etc/cron.d/mysql-backup
+

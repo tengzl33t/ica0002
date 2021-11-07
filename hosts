@@ -1,5 +1,5 @@
-remote1 ansible_host=193.40.156.86 ansible_port=12022 ansible_ssh_user=ubuntu
-remote2 ansible_host=193.40.156.86 ansible_port=3122 ansible_ssh_user=ubuntu
+remote1 ansible_host=193.40.156.86 ansible_port=16222 ansible_ssh_user=ubuntu
+remote2 ansible_host=193.40.156.86 ansible_port=16422 ansible_ssh_user=ubuntu
 
 [web_servers]
 remote1

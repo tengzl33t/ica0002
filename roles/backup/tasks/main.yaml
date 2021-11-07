@@ -24,3 +24,19 @@
     src: /home/tengz/Documents/GitVSC/ica0002/roles/backup/templates/known_hosts.j2
     dest: /home/backup/.ssh/known_hosts
     owner: backup
+
+- name: MySQL user for backup
+  community.mysql.mysql_user:
+    name: "backup"
+    password: "{{ mysql_password }}"
+    host: "{{ mysql_host }}"
+    priv: 
+      '*.*': 'LOCK TABLES,SELECT'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Change mysql config
+  ansible.builtin.template:
+    src: /home/tengz/Documents/GitVSC/ica0002/roles/backup/templates/my.cnf.j2
+    dest: /home/backup/.my.cnf
+    owner: backup
+    mode: '0700'
