@@ -18,7 +18,7 @@
 
 - name: Copy new influx config
   ansible.builtin.copy:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/influxdb/files/influxdb.conf
+    src: influxdb.conf
     dest: /etc/influxdb/influxdb.conf
   notify: Restart influxdb
 
@@ -34,6 +34,6 @@
 
 - name: Copy new telegraph config
   ansible.builtin.copy:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/influxdb/files/telegraf.conf
+    src: telegraf.conf
     dest: /etc/telegraf/telegraf.conf
   notify: Restart telegraf

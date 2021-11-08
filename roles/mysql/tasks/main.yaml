@@ -14,7 +14,7 @@
 
 - name: Change mysql config
   ansible.builtin.copy:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/mysql/files/override.cnf
+    src: override.cnf
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify:
     - Restart mysql

@@ -13,7 +13,7 @@
 
 - name: Change mysql config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/mysql_exporter/templates/my.cnf.j2
+    src: my.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
   notify:
     - Restart mysql exporter

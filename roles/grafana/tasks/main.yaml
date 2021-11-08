@@ -18,7 +18,7 @@
 
 - name: Change grafana config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/grafana.ini.j2
+    src: grafana.ini.j2
     dest: /etc/grafana/grafana.ini
   notify:
     - Restart grafana
@@ -38,28 +38,28 @@
 
 - name: Configure Prometheus as default datasource
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/prometheus_ds.yaml.j2
+    src: prometheus_ds.yaml.j2
     dest: /etc/grafana/provisioning/datasources/prometheus.yaml
   notify:
     - Restart grafana
 
 - name: Configure Influx-Telegraf datasource
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/influx_telegraf_ds.yaml.j2
+    src: influx_telegraf_ds.yaml.j2
     dest: /etc/grafana/provisioning/datasources/influx_telegraf_ds.yaml
   notify:
     - Restart grafana
 
 - name: Configure Influx-Latency datasource
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/influx_latency_ds.yaml.j2
+    src: influx_latency_ds.yaml.j2
     dest: /etc/grafana/provisioning/datasources/influx_latency_ds.yaml
   notify:
     - Restart grafana
 
 - name: Configuration dashboards
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/templates/dashboards.yaml.j2
+    src: dashboards.yaml.j2
     dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
   notify:
     - Restart grafana
@@ -70,13 +70,13 @@
 
 - name: Setup main dashboard
   ansible.builtin.copy:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/files/main.json
+    src: main.json
     dest: /etc/grafana/provisioning/dashboards/main.json
   notify: Restart grafana
 
 - name: Configure Influx-Telegraf dash
   ansible.builtin.copy:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/grafana/files/syslog.json
+    src: syslog.json
     dest: /etc/grafana/provisioning/dashboards/syslog.json
   notify:
     - Restart grafana

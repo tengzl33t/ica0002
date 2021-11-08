@@ -6,7 +6,22 @@
     owner: backup
 
 - name: Copy crontab file
-  ansible.builtin.templates:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/mysql_backup/files/mysql-backup.j2
+  ansible.builtin.template:
+    src: mysql-backup.j2
     dest: /etc/cron.d/mysql-backup
 
+- name: MySQL user for backup
+  community.mysql.mysql_user:
+    host: "{{ mysql_host }}"
+    name: "backup"
+    password: "{{ mysql_password }}"
+    priv: 
+      '*agama.*': 'LOCK TABLES,SELECT'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: Change mysql config
+  ansible.builtin.template:
+    src: my.cnf.j2
+    dest: /home/backup/.my.cnf
+    owner: backup
+    mode: '0700'

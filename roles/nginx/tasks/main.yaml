@@ -4,19 +4,19 @@
 
 - name: Change nginx main page
   ansible.builtin.copy:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/nginx/files/index.html
+    src: index.html
     dest: /var/www/html/index.html
 
 - name: Change nginx config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/nginx/templates/default.j2
+    src: default.j2
     dest: /etc/nginx/sites-enabled/default
   notify:
     - Restart nginx
 
 - name: Change nginx config for exporter
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/nginx/templates/exporter.j2
+    src: exporter.j2
     dest: /etc/nginx/sites-enabled/exporter
   notify:
     - Restart nginx

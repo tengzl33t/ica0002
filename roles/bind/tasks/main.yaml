@@ -10,14 +10,14 @@
 
 - name: Change bind9 "named.conf.options" config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/named.conf.options.j2
+    src: named.conf.options.j2
     dest: /etc/bind/named.conf.options
   notify:
     - Restart bind
 
 - name: Change bind9 "db.sus" config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/db.sus.j2
+    src: db.sus.j2
     dest: /var/cache/bind/db.sus
   notify:
     - Restart rndc
@@ -25,7 +25,7 @@
 
 - name: Change bind9 "named.conf.local" config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/bind/templates/named.conf.local.j2
+    src: named.conf.local.j2
     dest: /etc/bind/named.conf.local
   notify:
     - Restart bind

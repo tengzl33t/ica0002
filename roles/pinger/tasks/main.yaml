@@ -14,13 +14,13 @@
 
 - name: Copy pinger shell file
   ansible.builtin.copy:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/pinger/files/pinger.sh
+    src: pinger.sh
     dest: /usr/local/bin/pinger
     mode: a+x
 
 - name: Copy pinger service file
   ansible.builtin.copy:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/pinger/files/pinger.service
+    src: pinger.service
     dest: /etc/systemd/system/pinger.service
     mode: a+x
   notify:
@@ -28,7 +28,7 @@
 
 - name: Copy pinger config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/pinger/templates/pinger.conf.j2
+    src: pinger.conf.j2
     dest: /etc/pinger/pinger.conf
   notify:
     - Restart pinger

@@ -14,7 +14,7 @@
 
 - name: Change agama config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/uwsgi/templates/agama.ini
+    src: agama.ini
     dest: /etc/uwsgi/apps-enabled
   notify:
     - Restart uwsgi

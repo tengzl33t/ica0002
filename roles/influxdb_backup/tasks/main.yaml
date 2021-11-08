@@ -6,6 +6,6 @@
     owner: backup
 
 - name: Copy crontab file
-  ansible.builtin.templates:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/influxdb_backup/files/influxdb-backup.j2
+  ansible.builtin.template:
+    src: influxdb-backup.j2
     dest: /etc/cron.d/influxdb-backup

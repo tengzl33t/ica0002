@@ -6,5 +6,5 @@
 
 - name: Change resolv config
   ansible.builtin.template:
-    src: /home/tengz/Documents/GitVSC/ica0002/roles/resolv/templates/resolv.conf.j2
+    src: resolv.conf.j2
     dest: /etc/resolv.conf
