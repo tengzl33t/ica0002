@@ -1,2 +1,4 @@
 [mysqld]
 bind-address = 0.0.0.0
+validate_password.policy = 0
+validate_password.length = 6

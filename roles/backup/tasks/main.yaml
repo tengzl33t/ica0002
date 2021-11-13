@@ -8,7 +8,6 @@
     ssh_key_bits: 2048
     ssh_key_file: .ssh/id_rsa
     
-
 - name: Create restore directory
   ansible.builtin.file:
     path: /home/backup/restore
@@ -20,7 +19,7 @@
   apt:
     name: duplicity
 
-- name: Copy pinger config
+- name: Copy known hosts file
   ansible.builtin.template:
     src: known_hosts.j2
     dest: /home/backup/.ssh/known_hosts
