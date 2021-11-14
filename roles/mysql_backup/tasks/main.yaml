@@ -2,14 +2,15 @@
   ansible.builtin.file:
     path: /home/backup/mysql
     state: directory
-    mode: '0755'
+    mode: 0755
     owner: backup
 
 - name: MySQL user for backup
   community.mysql.mysql_user:
     name: "{{ mysql_backup_user }}"
     password: "{{ mysql_backup_pass }}"
-    priv: "agama.*:LOCK TABLES,SELECT"
+    priv: 
+      'agama.*': 'LOCK TABLES,SELECT'
     login_unix_socket: /var/run/mysqld/mysqld.sock
 
 - name: Change my.cnf mysql config
@@ -17,7 +18,7 @@
     src: my.cnf.j2
     dest: /home/backup/.my.cnf
     owner: backup
-    mode: '0400'
+    mode: 0400
 
 - name: Copy crontab file
   ansible.builtin.template:

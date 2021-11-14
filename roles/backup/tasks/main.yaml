@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: /home/backup/restore
     state: directory
-    mode: '0755'
+    mode: 0755
     owner: backup
 
 - name: Install duplicity
