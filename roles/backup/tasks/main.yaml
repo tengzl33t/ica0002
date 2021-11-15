@@ -21,3 +21,4 @@
     src: known_hosts.j2
     dest: /home/backup/.ssh/known_hosts
     owner: backup
+    
