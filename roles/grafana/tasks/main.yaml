@@ -72,11 +72,19 @@
   ansible.builtin.copy:
     src: main.json
     dest: /etc/grafana/provisioning/dashboards/main.json
-  notify: Restart grafana
+  notify:
+    - Restart grafana
 
 - name: Configure Influx-Telegraf dash
   ansible.builtin.copy:
     src: syslog.json
     dest: /etc/grafana/provisioning/dashboards/syslog.json
+  notify:
+    - Restart grafana
+
+- name: Configure MySQL dash
+  ansible.builtin.copy:
+    src: mysql.json
+    dest: /etc/grafana/provisioning/dashboards/mysql.json
   notify:
     - Restart grafana

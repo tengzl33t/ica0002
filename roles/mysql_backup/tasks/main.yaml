@@ -20,7 +20,7 @@
     owner: backup
     mode: 0400
 
-- name: Copy crontab file
+- name: Copy mysql backup crontab file
   ansible.builtin.template:
     src: mysql-backup.j2
     dest: /etc/cron.d/mysql-backup

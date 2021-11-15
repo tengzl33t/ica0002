@@ -18,6 +18,13 @@
   notify:
     - Restart mysql exporter
 
+- name: Copy mysqld exp file
+  ansible.builtin.copy:
+    src: prometheus-mysqld-exporter
+    dest: /etc/default/prometheus-mysqld-exporter
+  notify:
+    - Restart mysql exporter
+
 - name: Pause for 10 seconds
   pause:
     seconds: 10

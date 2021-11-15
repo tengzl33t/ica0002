@@ -31,3 +31,12 @@
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: MySQL replication user
+  community.mysql.mysql_user:
+    name: "{{ mysql_repl_user }}"
+    password: "{{ mysql_repl_pass }}"
+    host: "%"
+    priv: 
+      '*.*': 'REPLICATION SLAVE'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
