@@ -4,7 +4,8 @@ server {
 	index index.html index.htm index.nginx-debian.html;
 	server_name _;
 
-	{% if inventory_hostname in groups['web_servers'] %}location / {
+	{% if inventory_hostname in groups['web_servers'] %}
+	location / {
 		uwsgi_pass localhost:5000;
 		include uwsgi_params;
 	}
@@ -18,14 +19,19 @@ server {
 		proxy_pass http://localhost:9100/metrics;
 	}
 
-	{% if inventory_hostname in groups['dns_servers'] %}location /bind-metrics {
+	{% if inventory_hostname in groups['dns_servers'] %}
+	location /bind-metrics {
 		proxy_pass http://localhost:9119/metrics;
 	}
+	{% endif %}
 
+	{% if inventory_hostname in groups['grafana'] %}
 	location /grafana {
 		proxy_pass http://localhost:3000;
 	}
+	{% endif %}
 
+	{% if inventory_hostname in groups['db_servers'] %}
 	location /influxdb-metrics {
 		proxy_pass http://localhost:9424/metrics;
 	}
@@ -35,7 +41,8 @@ server {
 	}
 	{% endif %}
 
-	{% if inventory_hostname in groups['prometheus'] %}location /prometheus {
+	{% if inventory_hostname in groups['prometheus'] %}
+	location /prometheus {
 		proxy_pass http://localhost:9090;
 	}
 	{% endif %}

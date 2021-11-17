@@ -13,7 +13,7 @@
     enabled: yes
 
 - name: Change mysql config
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: override.cnf
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify:
@@ -40,3 +40,13 @@
     priv: 
       '*.*': 'REPLICATION SLAVE'
     login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: MySQL replica read only
+  community.mysql.mysql_variables:
+    variable: read_only
+    value: "{{ 'OFF' if inventory_hostname == mysql_host else 'ON' }}"
+    mode: persist
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+  notify:
+      - Reset MySQL source
+      - Reset MySQL replica

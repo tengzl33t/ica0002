@@ -4,22 +4,34 @@
   roles:
     - init
 
-- name: Database/DNS server
+- name: DB 1
   hosts: db_servers
   become: yes
   roles:
     - mysql
-    - bind
+    - influxdb
 
-- name: Web server
+- name: DNS 1
+  hosts: dns_servers
+  become: yes
+  roles:
+    - bind
+    - bind_exporter
+
+- name: Web 1
   hosts: web_servers
   become: yes
   roles:
     - agama
     - uwsgi
+
+- name: Prometheus
+  hosts: prometheus
+  become: yes
+  roles:
     - prometheus
 
-- name: All
+- name: All 1
   hosts: all
   become: yes
   roles:
@@ -30,15 +42,23 @@
     - rsyslog
     - backup
 
-- name: Database/DNS server
+- name: Grafana
+  hosts: grafana
+  become: yes
+  roles:
+    - grafana
+
+- name: Pinger
+  hosts: pinger
+  become: yes
+  roles:
+    - pinger
+
+- name: DB 2
   hosts: db_servers
   become: yes
   roles:
     - mysql_exporter
-    - bind_exporter
-    - grafana
-    - influxdb
-    - pinger
     - influxdb_exporter
     - mysql_backup
     - influxdb_backup

@@ -20,7 +20,9 @@ query_allow:
 
 domain: sus
 tld: eu
-backup_server: 192.168.42.174
+backup_server: 192.168.42.156
+
+node_id: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'].split('.')[-1] }}"
 
 github_username: tengzl33t
 mysql_backup_user: backup

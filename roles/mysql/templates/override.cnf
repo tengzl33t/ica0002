@@ -1,0 +1,5 @@
+[mysqld]
+bind-address = 0.0.0.0
+relay-log = /var/log/mysql/mysql-relay.log
+replicate-do-db = {{ mysql_database }}
+server-id = {{ node_id }}

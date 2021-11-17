@@ -24,12 +24,18 @@ scrape_configs:
 
   - job_name: 'bind9'
     static_configs:
-      - targets: ['remote2:9119']
+      - targets:
+        {% for machine in groups['dns_servers'] %}- {{ machine }}:9119
+        {% endfor %}
 
   - job_name: 'mysql'
     static_configs:
-      - targets: ['remote2:9104']
+      - targets:
+        {% for machine in groups['db_servers'] %}- {{ machine }}:9104
+        {% endfor %}
   
   - job_name: 'influxdb'
     static_configs:
-      - targets: ['remote2:9424']
+      - targets: 
+        {% for machine in groups['db_servers'] %}- {{ machine }}:9424
+        {% endfor %}
