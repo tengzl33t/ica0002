@@ -10,7 +10,7 @@
   loop:
     - stopreplica
     - resetprimary
-  when: inventory_hostname == mysql_host
+  when: hostvars[inventory_hostname]['ansible_default_ipv4']['address'] == mysql_host
 
 - name: Reset MySQL replica
   community.mysql.mysql_replication:
@@ -24,4 +24,4 @@
     - changeprimary
     - resetreplica
     - startreplica
-  when: inventory_hostname != mysql_host
+  when: hostvars[inventory_hostname]['ansible_default_ipv4']['address'] != mysql_host

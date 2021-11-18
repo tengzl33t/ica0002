@@ -22,7 +22,7 @@ Check restore results:
 
     Make sure that restore commands didn't give errors,
     Check agama restore results at agama page,
-    Check telegraf restore results at ??? somewhere
+    Check telegraf restore results at grafana syslog
 
 Verify that backup was successful and run ansible playbook again:
 

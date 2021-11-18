@@ -44,7 +44,7 @@
 - name: MySQL replica read only
   community.mysql.mysql_variables:
     variable: read_only
-    value: "{{ 'OFF' if inventory_hostname == mysql_host else 'ON' }}"
+    value: "{{ 'OFF' if hostvars[inventory_hostname]['ansible_default_ipv4']['address'] == mysql_host else 'ON' }}"
     mode: persist
     login_unix_socket: /var/run/mysqld/mysqld.sock
   notify:
