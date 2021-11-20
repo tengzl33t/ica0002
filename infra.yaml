@@ -22,8 +22,9 @@
   hosts: web_servers
   become: yes
   roles:
+    - docker_fix
+    - docker
     - agama
-    - uwsgi
 
 - name: Prometheus
   hosts: prometheus
@@ -46,6 +47,7 @@
   hosts: grafana
   become: yes
   roles:
+    - docker
     - grafana
 
 - name: Pinger

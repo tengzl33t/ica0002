@@ -1,0 +1,90 @@
+- name: add grafana gpg key
+  ansible.builtin.apt_key:
+    url: https://packages.grafana.com/gpg.key
+
+- name: add grafana rep
+  ansible.builtin.apt_repository:
+    repo: deb https://packages.grafana.com/oss/deb stable main
+
+- name: Install grafana
+  apt:
+    name: grafana
+
+- name: Start and enable grafana
+  ansible.builtin.service:
+    name: grafana-server
+    state: started
+    enabled: yes
+
+- name: Change grafana config
+  ansible.builtin.template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+  notify:
+    - Restart grafana
+
+- name: Pause for 10 seconds
+  pause:
+    seconds: 20
+
+- name: Change admin password
+  shell: grafana-cli admin reset-admin-password {{grafana_admin_password}}
+  notify:
+    - Restart grafana
+
+- name: Pause for 10 seconds
+  pause:
+    seconds: 10
+
+- name: Configure Prometheus as default datasource
+  ansible.builtin.template:
+    src: prometheus_ds.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/prometheus.yaml
+  notify:
+    - Restart grafana
+
+- name: Configure Influx-Telegraf datasource
+  ansible.builtin.template:
+    src: influx_telegraf_ds.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/influx_telegraf_ds.yaml
+  notify:
+    - Restart grafana
+
+- name: Configure Influx-Latency datasource
+  ansible.builtin.template:
+    src: influx_latency_ds.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/influx_latency_ds.yaml
+  notify:
+    - Restart grafana
+
+- name: Configuration dashboards
+  ansible.builtin.template:
+    src: dashboards.yaml.j2
+    dest: /etc/grafana/provisioning/dashboards/dashboards.yaml
+  notify:
+    - Restart grafana
+
+- name: Pause for 10 seconds
+  pause:
+    seconds: 10
+
+- name: Setup main dashboard
+  ansible.builtin.copy:
+    src: main.json
+    dest: /etc/grafana/provisioning/dashboards/main.json
+  notify:
+    - Restart grafana
+
+- name: Configure Influx-Telegraf dash
+  ansible.builtin.copy:
+    src: syslog.json
+    dest: /etc/grafana/provisioning/dashboards/syslog.json
+  notify:
+    - Restart grafana
+
+- name: Configure MySQL dash
+  ansible.builtin.copy:
+    src: mysql.json
+    dest: /etc/grafana/provisioning/dashboards/mysql.json
+  notify:
+    - Restart grafana
