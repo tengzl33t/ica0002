@@ -1,3 +1,8 @@
+- name: Change grafana config
+  ansible.builtin.template:
+    src: grafana.ini.j2
+    dest: /opt/grafana/grafana.ini
+
 - name: Create grafana container
   community.docker.docker_container:
     name: grafana
@@ -49,8 +54,3 @@
   ansible.builtin.template:
     src: influx_latency_ds.yaml.j2
     dest: /opt/grafana/provisioning/datasources/influx_latency_ds.yaml
-
-- name: Change grafana config
-  ansible.builtin.template:
-    src: grafana.ini.j2
-    dest: /opt/grafana/grafana.ini

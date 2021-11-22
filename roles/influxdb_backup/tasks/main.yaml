@@ -5,6 +5,11 @@
     mode: '0755'
     owner: backup
 
+- name: Create influxdb directory on backup server
+  ansible.builtin.shell:
+    cmd: sudo -u backup ssh {{ github_username }}@backup.{{ domain }}.{{ tld }} mkdir -p ./influxdb
+  when: hostvars[inventory_hostname]['ansible_default_ipv4']['address'] == mysql_host
+
 - name: Copy crontab file
   ansible.builtin.template:
     src: influxdb-backup.j2

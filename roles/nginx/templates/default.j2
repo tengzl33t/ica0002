@@ -7,6 +7,7 @@ server {
 	{% if inventory_hostname in groups['web_servers'] %}
 	location / {
 		proxy_pass http://localhost:{{ agama_port }};
+		proxy_set_header Host $http_host;
 	}
 	{% endif %}
 

@@ -1,5 +1,5 @@
 {% if hostvars[inventory_hostname]['ansible_default_ipv4']['address'] != mysql_host -%}
 0 21 * * * backup mysqldump agama > /home/backup/mysql/agama.sql
-10 21 * * 0  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://{{ github_username }}@backup.{{ domain }}.{{ tld }}//home/tengzl33t/
-10 21 * * 1-6  backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://{{ github_username }}@backup.{{ domain }}.{{ tld }}//home/tengzl33t/
+10 21 * * 0  backup  duplicity --no-encryption full /home/backup/mysql/ rsync://{{ github_username }}@backup.{{ domain }}.{{ tld }}//home/tengzl33t/mysql/
+10 21 * * 1-6  backup  duplicity --no-encryption incremental /home/backup/mysql/ rsync://{{ github_username }}@backup.{{ domain }}.{{ tld }}//home/tengzl33t/mysql/
 {% endif -%}
