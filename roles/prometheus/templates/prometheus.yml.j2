@@ -22,6 +22,18 @@ scrape_configs:
         {% for machine in groups['all'] %}- {{ machine }}:9113
         {% endfor %}
 
+  - job_name: 'haproxy'
+    static_configs:
+      - targets:
+        {% for machine in groups['all'] %}- {{ machine }}:9101
+        {% endfor %}
+
+  - job_name: 'keepalived'
+    static_configs:
+      - targets:
+        {% for machine in groups['all'] %}- {{ machine }}:9165
+        {% endfor %}
+
   - job_name: 'bind9'
     static_configs:
       - targets:

@@ -18,14 +18,6 @@
     - bind
     - bind_exporter
 
-- name: Web 1
-  hosts: web_servers
-  become: yes
-  roles:
-    - docker_fix
-    - docker
-    - agama
-
 - name: Prometheus
   hosts: prometheus
   become: yes
@@ -36,9 +28,12 @@
   hosts: all
   become: yes
   roles:
+    - resolv
+    - docker_fix
+    - docker
+    - agama
     - node_exporter
     - nginx
-    - resolv
     - nginx_exporter
     - rsyslog
     - backup
@@ -64,3 +59,12 @@
     - influxdb_exporter
     - mysql_backup
     - influxdb_backup
+
+- name: Haproxy/Keepalived
+  hosts: all
+  become: yes
+  roles:
+    - keepalived
+    - haproxy
+    - keepalived_exporter
+    - haproxy_exporter

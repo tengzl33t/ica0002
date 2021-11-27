@@ -17,8 +17,16 @@
 
 - name: Create agama container
   community.docker.docker_container:
-    name: agama
+    name: agama-1
     image: agama
     env:
       AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
-    published_ports: "{{ agama_port }}:8000"
+    published_ports: "{{ agama_port1 }}:8000"
+
+- name: Create agama container
+  community.docker.docker_container:
+    name: agama-2
+    image: agama
+    env:
+      AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
+    published_ports: "{{ agama_port2 }}:8000"

@@ -12,7 +12,7 @@
   notify:
     - Reload systemd
 
-- name: Start and enable pinger
+- name: Start and enable influx exporter
   ansible.builtin.service:
     name: prometheus-influxdb-stats-exporter
     state: started

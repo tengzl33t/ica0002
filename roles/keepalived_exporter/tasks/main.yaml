@@ -1,0 +1,19 @@
+- name: Copy keepalived exporter binary
+  ansible.builtin.copy:
+    src: keepalived_exporter
+    dest: /usr/local/bin/keepalived_exporter
+    mode: a+x
+
+- name: Copy keepalived exporter service file
+  ansible.builtin.copy:
+    src: keepalived_exporter.service
+    dest: /etc/systemd/system/keepalived_exporter.service
+    mode: a+x
+  notify:
+    - Reload systemd
+
+- name: Start and enable keepalived exporter
+  ansible.builtin.service:
+    name: keepalived_exporter
+    state: started
+    enabled: yes

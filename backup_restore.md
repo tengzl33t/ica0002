@@ -6,9 +6,9 @@ Restore MySQL agama data from the backup:
 
     Open console with root user and type:
 
-    rm -rf /home/backup/restore/*
-    sudo -u backup duplicity --no-encryption restore rsync://tengzl33t@backup.sus.eu//home/tengzl33t/ /home/backup/restore/
-    mysql agama < /home/backup/restore/agama.sql
+    rm -rf /home/backup/restore/mysql/*
+    sudo -u backup duplicity --no-encryption restore rsync://tengzl33t@backup.sus.eu//home/tengzl33t/mysql /home/backup/restore/mysql/
+    mysql agama < /home/backup/restore/mysql/agama.sql
 
 Restore InfluxDB telegraf data from the backup:
 
@@ -16,7 +16,8 @@ Restore InfluxDB telegraf data from the backup:
 
     systemctl stop telegraf
     influx -execute 'DROP DATABASE telegraf'
-    influxd restore -portable -database telegraf /home/backup/influxdb
+    sudo -u backup duplicity --no-encryption restore rsync://tengzl33t@backup.sus.eu//home/tengzl33t/influxdb/ /home/backup/restore/influxdb//
+    influxd restore -portable -database telegraf /home/backup/restore/influxdb/
 
 Check restore results:
 

@@ -1,3 +1,5 @@
+{% if hostvars[inventory_hostname]['ansible_default_ipv4']['address'] == mysql_host -%}
 30 21 * * * backup rm -rf /home/backup/influxdb/*; influxd backup -portable -database telegraf /home/backup/influxdb/
-40 21 * * 0  backup duplicity --no-encryption full /home/backup/influxdb/ rsync://{{ github_username }}@backup.{{ domain }}.{{ tld }}//home/tengzl33t/influxdb/
-40 21 * * 1-6  backup duplicity --no-encryption incremental /home/backup/influxdb/ rsync://{{ github_username }}@backup.{{ domain }}.{{ tld }}//home/tengzl33t/influxdb/
+40 21 * * 0 backup duplicity --no-encryption full /home/backup/influxdb/ rsync://{{ github_username }}@backup.{{ domain }}.{{ tld }}//home/tengzl33t/influxdb/
+40 21 * * 1-6 backup duplicity --no-encryption incremental /home/backup/influxdb/ rsync://{{ github_username }}@backup.{{ domain }}.{{ tld }}//home/tengzl33t/influxdb/
+{% endif -%}

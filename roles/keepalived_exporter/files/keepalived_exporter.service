@@ -1,0 +1,9 @@
+[Unit]
+After=network-online.target
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/keepalived_exporter
+
+[Install]
+WantedBy=multi-user.target

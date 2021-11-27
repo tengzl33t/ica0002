@@ -59,7 +59,8 @@ grafana_admin_password: !vault |
           3931
 
 grafana_port: 3001
-agama_port: 8001
+agama_port1: 8001
+agama_port2: 8002
 
 backup_server_ssh_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBSne71MCp6CQCHURWe3CLud6vPDkLfL83Oab/giAI7O
 

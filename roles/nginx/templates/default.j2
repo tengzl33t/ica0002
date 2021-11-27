@@ -4,12 +4,10 @@ server {
 	index index.html index.htm index.nginx-debian.html;
 	server_name _;
 
-	{% if inventory_hostname in groups['web_servers'] %}
 	location / {
-		proxy_pass http://localhost:{{ agama_port }};
+		proxy_pass http://localhost:{{ agama_port1 }};
 		proxy_set_header Host $http_host;
 	}
-	{% endif %}
 
 	location /nginx-metrics {
 		proxy_pass http://localhost:9113/metrics;
@@ -17,6 +15,14 @@ server {
 
 	location /node-metrics {
 		proxy_pass http://localhost:9100/metrics;
+	}
+
+	location /haproxy-metrics {
+		proxy_pass http://localhost:9101/metrics;
+	}
+
+	location /keepalived-metrics {
+		proxy_pass http://localhost:9165/metrics;
 	}
 
 	{% if inventory_hostname in groups['dns_servers'] %}
