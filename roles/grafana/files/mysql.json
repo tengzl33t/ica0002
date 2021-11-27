@@ -75,7 +75,7 @@
       "id": 2,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
@@ -93,7 +93,7 @@
         {
           "exemplar": true,
           "expr": "mysql_up{instance=\"remote1:9104\"}",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "legendFormat": "remote1",
           "refId": "A"
@@ -102,7 +102,7 @@
           "exemplar": true,
           "expr": "mysql_up{instance=\"remote2:9104\"}",
           "hide": false,
-          "instant": true,
+          "instant": false,
           "interval": "",
           "legendFormat": "remote2",
           "refId": "B"
@@ -221,7 +221,7 @@
       "id": 6,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
@@ -239,7 +239,7 @@
         {
           "exemplar": true,
           "expr": "mysql_global_variables_server_id{instance=\"remote1:9104\"}",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "legendFormat": "remote1",
           "refId": "A"
@@ -248,7 +248,7 @@
           "exemplar": true,
           "expr": "mysql_global_variables_server_id{instance=\"remote2:9104\"}",
           "hide": false,
-          "instant": true,
+          "instant": false,
           "interval": "",
           "legendFormat": "remote2",
           "refId": "B"
@@ -290,7 +290,7 @@
       "id": 8,
       "options": {
         "colorMode": "value",
-        "graphMode": "area",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
         "reduceOptions": {
@@ -308,7 +308,7 @@
         {
           "exemplar": true,
           "expr": "mysql_global_variables_read_only{instance=\"remote1:9104\"}",
-          "instant": true,
+          "instant": false,
           "interval": "",
           "legendFormat": "remote1",
           "refId": "A"
@@ -317,7 +317,7 @@
           "exemplar": true,
           "expr": "mysql_global_variables_read_only{instance=\"remote2:9104\"}",
           "hide": false,
-          "instant": true,
+          "instant": false,
           "interval": "",
           "legendFormat": "remote2",
           "refId": "B"

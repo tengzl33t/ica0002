@@ -9,7 +9,7 @@
   notify:
     - Restart haproxy
 
-- name: Start and enable keepalived
+- name: Start and enable haproxy
   ansible.builtin.service:
     name: haproxy
     state: started

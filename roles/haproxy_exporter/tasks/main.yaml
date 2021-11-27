@@ -13,4 +13,4 @@
     src: prometheus-haproxy-exporter.j2
     dest: /etc/default/prometheus-haproxy-exporter
   notify:
-    - Restart haproxy-exporter
+    - Restart haproxy exporter
