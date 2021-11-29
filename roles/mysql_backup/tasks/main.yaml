@@ -20,11 +20,6 @@
     owner: backup
     mode: 0400
 
-#- name: Create mysql directory on backup server
-#  ansible.builtin.shell:
-#    cmd: sudo -u backup ssh {{ github_username }}@backup.{{ domain }}.{{ tld }} mkdir -p ./mysql
-#  when: hostvars[inventory_hostname]['ansible_default_ipv4']['address'] != mysql_host
-
 - name: Copy mysql backup crontab file
   ansible.builtin.template:
     src: mysql-backup.j2

@@ -16,7 +16,7 @@ Restore InfluxDB telegraf data from the backup:
 
     systemctl stop telegraf
     influx -execute 'DROP DATABASE telegraf'
-    sudo -u backup duplicity --no-encryption restore rsync://tengzl33t@backup.sus.eu//home/tengzl33t/influxdb/ /home/backup/restore/influxdb//
+    sudo -u backup duplicity --no-encryption restore rsync://tengzl33t@backup.sus.eu//home/tengzl33t/influxdb/ /home/backup/restore/influxdb/
     influxd restore -portable -database telegraf /home/backup/restore/influxdb/
 
 Check restore results:

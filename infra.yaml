@@ -4,19 +4,18 @@
   roles:
     - init
 
-- name: DB 1
-  hosts: db_servers
-  become: yes
-  roles:
-    - mysql
-    - influxdb
-
-- name: DNS 1
+- name: DNS Servers
   hosts: dns_servers
   become: yes
   roles:
     - bind
     - bind_exporter
+
+- name: Resolv
+  hosts: all
+  become: yes
+  roles:
+    - resolv
 
 - name: Prometheus
   hosts: prometheus
@@ -24,11 +23,26 @@
   roles:
     - prometheus
 
+- name: MySQL
+  hosts: mysql
+  become: yes
+  roles:
+    - mysql
+    - mysql_exporter
+    - mysql_backup
+
+- name: InfluxDB
+  hosts: influxdb
+  become: yes
+  roles:
+    - influxdb
+    - influxdb_exporter
+    - influxdb_backup
+
 - name: All 1
   hosts: all
   become: yes
   roles:
-    - resolv
     - docker_fix
     - docker
     - agama
@@ -50,15 +64,6 @@
   become: yes
   roles:
     - pinger
-
-- name: DB 2
-  hosts: db_servers
-  become: yes
-  roles:
-    - mysql_exporter
-    - influxdb_exporter
-    - mysql_backup
-    - influxdb_backup
 
 - name: Haproxy/Keepalived
   hosts: all

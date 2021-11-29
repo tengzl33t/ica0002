@@ -313,20 +313,12 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "influxdb_exporter_stats_query_success{instance=\"remote1:9424\"}",
-          "instant": false,
-          "interval": "",
-          "legendFormat": "remote1",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
           "expr": "influxdb_exporter_stats_query_success{instance=\"remote2:9424\"}",
           "hide": false,
           "instant": false,
           "interval": "",
           "legendFormat": "remote2",
-          "refId": "B"
+          "refId": "A"
         }
       ],
       "title": "InfluxDB health",
@@ -774,18 +766,10 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "influxdb_write_write_ok{instance=\"remote1:9424\"}",
-          "interval": "",
-          "legendFormat": "remote1",
-          "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "influxdb_write_write_ok{instance=\"remote1:9424\"}",
-          "hide": false,
+          "expr": "influxdb_write_write_ok{instance=\"remote2:9424\"}",
           "interval": "",
           "legendFormat": "remote2",
-          "refId": "B"
+          "refId": "A"
         }
       ],
       "title": "InfluxDB write rate",
