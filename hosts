@@ -1,8 +1,9 @@
-remote1 ansible_host=193.40.156.86 ansible_port=20022 ansible_ssh_user=ubuntu
-remote2 ansible_host=193.40.156.86 ansible_port=3722 ansible_ssh_user=ubuntu
+remote1 ansible_host=193.40.156.86 ansible_port=14622 ansible_ssh_user=ubuntu
+remote2 ansible_host=193.40.156.86 ansible_port=18822 ansible_ssh_user=ubuntu
 
 [web_servers]
 remote1
+remote2
 
 [prometheus]
 remote1
@@ -15,6 +16,13 @@ remote2
 
 [dns_servers]
 remote2
+remote1
+
+[dns_master]
+remote2
+
+[dns_slave]
+remote1
 
 [influxdb]
 remote2

@@ -25,6 +25,10 @@
   notify:
     - Restart mysql exporter
 
+- name: Pause for 10 seconds
+  pause:
+    seconds: 10
+
 - name: Start and enable mysql exporter
   ansible.builtin.service:
     name: prometheus-mysqld-exporter

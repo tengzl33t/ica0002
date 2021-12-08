@@ -2,6 +2,10 @@
   apt:
     name: bind9
 
+- name: Install dnspython
+  apt:
+    name: python3-dnspython
+
 - name: Start and enable bind9
   ansible.builtin.service:
     name: bind9
@@ -19,9 +23,19 @@
   ansible.builtin.template:
     src: db.sus.j2
     dest: /var/cache/bind/db.sus
+    force: no
   notify:
     - Restart rndc
+  when: inventory_hostname in groups['dns_master']
 
+- name: Change bind9 "db.sus.reverse" config
+  ansible.builtin.template:
+    src: db.sus.reverse.j2
+    dest: /var/cache/bind/db.sus.reverse
+    force: no
+  notify:
+    - Restart rndc
+  when: inventory_hostname in groups['dns_master']
 
 - name: Change bind9 "named.conf.local" config
   ansible.builtin.template:
@@ -29,3 +43,33 @@
     dest: /etc/bind/named.conf.local
   notify:
     - Restart bind
+
+- name: Add backup server A record
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "localhost"
+    record: "backup"
+    zone: "sus.eu"
+    type: "A"
+    value: "{{ backup_server }}"
+  notify:
+    - Restart bind
+  loop:
+  when: inventory_hostname in groups['dns_master']
+
+- name: Add additional CNAME records
+  community.general.nsupdate:
+    key_name: "nsupdate.key"
+    key_secret: "{{ nsupdate_key }}"
+    key_algorithm: "hmac-sha256"
+    server: "localhost"
+    record: "{{ item.key }}"
+    zone: "sus.eu"
+    type: "CNAME"
+    value: "{{ item.value }}"
+  notify:
+    - Restart bind
+  loop: "{{ dns_cname_records | dict2items }}"
+  when: inventory_hostname in groups['dns_master']
