@@ -7,8 +7,8 @@ $TTL	604800
 			 604800 )	; Negative Cache TTL
 ;
 {% for vm in groups['dns_servers'] %}
-42.168.192.in-addr.arpa.	IN	NS	{{ vm }}
+42.168.192.in-addr.arpa.	IN	NS	{{ vm }}.{{domain}}.{{tld}}. 
 {% endfor %}
 {% for vm in groups['all'] %}
-{{ hostvars[vm]['ansible_default_ipv4']['address'] }} IN PTR {{ vm }}
+{{ hostvars[vm]['ansible_default_ipv4']['address'].split('.')[-1] }} IN PTR {{ vm }}.{{domain}}.{{tld}}. 
 {% endfor %}
