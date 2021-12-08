@@ -1,13 +1,24 @@
-zone "{{domain}}.{{tld}}" {
+zone "{{domain}}" {
+    file "db.sus";
 {% if inventory_hostname in groups['dns_master'] %}
     type master;
-    file "db.sus";
     allow-transfer {127.0.0.1; key transfer.key;};
     allow-update {key nsupdate.key;};
 {% else %}
     type slave;
-    masters { {% for vm in groups['dns_master'] %}{{ hostvars[vm]['ansible_default_ipv4']['address'] }};
-    {% endfor %} };
+    masters { {% for vm in groups['dns_master'] %}{{ hostvars[vm]['ansible_default_ipv4']['address'] }};{% endfor %} };
+{% endif %}
+};
+
+zone "42.168.192.in-addr.arpa" {
+    file "db.sus.reverse";
+{% if inventory_hostname in groups['dns_master'] %}
+    type master;
+    allow-transfer {127.0.0.1; key transfer.key;};
+    allow-update {key nsupdate.key;};
+{% else %}
+    type slave;
+    masters { {% for vm in groups['dns_master'] %}{{ hostvars[vm]['ansible_default_ipv4']['address'] }};{% endfor %} };
 {% endif %}
 };
 
@@ -16,16 +27,3 @@ server {{ hostvars[groups['dns_master'][0]]['ansible_default_ipv4']['address'] }
     keys { transfer.key; };
 };
 {% endif %}
-
-zone "42.168.192.in-addr.arpa" {
-{% if inventory_hostname in groups['dns_master'] %}
-    type master;
-    file "db.sus.reverse";
-    allow-transfer {127.0.0.1; key transfer.key;};
-    allow-update {key nsupdate.key;};
-{% else %}
-    type slave;
-    masters { {% for vm in groups['dns_master'] %}{{ hostvars[vm]['ansible_default_ipv4']['address'] }};
-    {% endfor %} };
-{% endif %}
-};

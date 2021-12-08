@@ -6,12 +6,6 @@
   apt:
     name: python3-dnspython
 
-- name: Start and enable bind9
-  ansible.builtin.service:
-    name: bind9
-    state: started
-    enabled: yes
-
 - name: Change bind9 "named.conf.options" config
   ansible.builtin.template:
     src: named.conf.options.j2
@@ -20,22 +14,22 @@
     - Restart bind
 
 - name: Change bind9 "db.sus" config
+  when: inventory_hostname in groups['dns_master']
   ansible.builtin.template:
     src: db.sus.j2
     dest: /var/cache/bind/db.sus
-    # force: no
+    force: no
   notify:
     - Restart rndc
-  when: inventory_hostname in groups['dns_master']
 
 - name: Change bind9 "db.sus.reverse" config
+  when: inventory_hostname in groups['dns_master']
   ansible.builtin.template:
     src: db.sus.reverse.j2
     dest: /var/cache/bind/db.sus.reverse
-    # force: no
+    force: no
   notify:
     - Restart rndc
-  when: inventory_hostname in groups['dns_master']
 
 - name: Change bind9 "named.conf.local" config
   ansible.builtin.template:
@@ -44,7 +38,17 @@
   notify:
     - Restart bind
 
+- name: Execute handlers
+  meta: flush_handlers
+
+- name: Start and enable bind9
+  ansible.builtin.service:
+    name: bind9
+    state: started
+    enabled: yes
+
 - name: Add backup server A record
+  when: inventory_hostname in groups['dns_master']
   community.general.nsupdate:
     key_name: "nsupdate.key"
     key_secret: "{{ nsupdate_key }}"
@@ -56,10 +60,9 @@
     value: "{{ backup_server }}"
   notify:
     - Restart bind
-  loop:
-  when: inventory_hostname in groups['dns_master']
 
 - name: Add additional CNAME records
+  when: inventory_hostname in groups['dns_master']
   community.general.nsupdate:
     key_name: "nsupdate.key"
     key_secret: "{{ nsupdate_key }}"
@@ -72,4 +75,3 @@
   notify:
     - Restart bind
   loop: "{{ dns_cname_records | dict2items }}"
-  when: inventory_hostname in groups['dns_master']

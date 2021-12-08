@@ -1,5 +1,5 @@
 $TTL	604800
-42.168.192.in-addr.arpa.	IN	SOA	remote2.{{domain}}.{{tld}}. random.{{domain}}.{{tld}}. (
+42.168.192.in-addr.arpa. IN	SOA	remote2.{{domain}}. mail.{{domain}}. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
@@ -7,8 +7,8 @@ $TTL	604800
 			 604800 )	; Negative Cache TTL
 ;
 {% for vm in groups['dns_servers'] %}
-42.168.192.in-addr.arpa.	IN	NS	{{ vm }}.{{domain}}.{{tld}}. 
+42.168.192.in-addr.arpa. IN	NS	{{ vm }}.{{domain}}. 
 {% endfor %}
 {% for vm in groups['all'] %}
-{{ hostvars[vm]['ansible_default_ipv4']['address'].split('.')[-1] }} IN PTR {{ vm }}.{{domain}}.{{tld}}. 
+{{ hostvars[vm]['ansible_default_ipv4']['address'].split('.')[-1] }} IN PTR {{ vm }}.{{domain}}.
 {% endfor %}

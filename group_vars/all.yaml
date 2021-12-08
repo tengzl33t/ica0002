@@ -20,8 +20,7 @@ query_allow:
   - 127.0.0.0/8
   - 172.17.0.0/16
 
-domain: sus
-tld: eu
+domain: sus.eu
 backup_server: 192.168.42.156
 
 node_id: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'].split('.')[-1] }}"
