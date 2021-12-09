@@ -1,37 +1,46 @@
-remote1 ansible_host=193.40.156.86 ansible_port=4122 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
-remote2 ansible_host=193.40.156.86 ansible_port=8622 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
-; remote3 ansible_host=193.40.156.86 ansible_port=14622 ansible_ssh_user=ubuntu ansible_python_interpreter=python3
+remote1 ansible_host=193.40.156.86 ansible_port=18922 ansible_ssh_user=ubuntu
+remote2 ansible_host=193.40.156.86 ansible_port=16522 ansible_ssh_user=ubuntu
+remote3 ansible_host=193.40.156.86 ansible_port=17722 ansible_ssh_user=ubuntu
 
 [web_servers]
 remote1
 remote2
 
 [prometheus]
-remote1
+remote3
 
 [grafana]
-remote2
+remote3
 
 [pinger]
 remote2
 
 [dns_servers]
-remote2
 remote1
-
-[dns_master]
 remote2
-
-[dns_slave]
-remote1
+remote3
 
 [influxdb]
-remote2
+remote3
 
 [haproxy]
 remote1
 remote2
 
 [mysql]
+remote1
+remote2
+
+[app_stack]
+remote1
+remote2
+
+[int_serv]
+remote3
+
+[dns_master]
+remote3
+
+[dns_slave]
 remote1
 remote2
