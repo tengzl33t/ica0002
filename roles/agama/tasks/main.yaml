@@ -15,7 +15,7 @@
     build:
       path: /opt/agama
 
-- name: Create agama container
+- name: Create agama-1 container
   community.docker.docker_container:
     name: agama-1
     image: agama
@@ -23,7 +23,7 @@
       AGAMA_DATABASE_URI: mysql+pymysql://{{ mysql_user }}:{{ mysql_password }}@{{ mysql_host }}/{{ mysql_database }}
     published_ports: "{{ agama_port1 }}:8000"
 
-- name: Create agama container
+- name: Create agama-2 container
   community.docker.docker_container:
     name: agama-2
     image: agama

@@ -37,8 +37,7 @@ listen sus
     bind :88
     stats enable
     stats uri /stats
-    server agama1-1 remote1:8001 check
-	server agama1-2 remote1:8002 check
-    server agama2-1 remote2:8001 check
-	server agama2-2 remote2:8002 check
-
+    server agama1-1 {{groups['app_stack'][0]}}:8001 check
+	server agama1-2 {{groups['app_stack'][0]}}:8002 check
+    server agama2-1 {{groups['app_stack'][1]}}:8001 check
+	server agama2-2 {{groups['app_stack'][1]}}:8002 check

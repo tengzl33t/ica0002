@@ -12,14 +12,6 @@
     src: grafana.ini.j2
     dest: /opt/grafana/grafana.ini
 
-- name: Create grafana container
-  community.docker.docker_container:
-    name: grafana
-    image: grafana/grafana
-    container_default_behavior: no_defaults
-    volumes: /opt/grafana:/etc/grafana
-    published_ports: "{{ grafana_port }}:3000"
-
 - name: Configuration for dashboards
   ansible.builtin.template:
     src: dashboards.yaml.j2
@@ -54,3 +46,11 @@
   ansible.builtin.template:
     src: influx_latency_ds.yaml.j2
     dest: /opt/grafana/provisioning/datasources/influx_latency_ds.yaml
+
+- name: Create grafana container
+  community.docker.docker_container:
+    name: grafana
+    image: grafana/grafana
+    container_default_behavior: no_defaults
+    volumes: /opt/grafana:/etc/grafana
+    published_ports: "{{ grafana_port }}:3000"

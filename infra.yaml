@@ -83,7 +83,7 @@
   roles:
     - init
 
-- name: Init
+- name: Node Exporter
   hosts: all
   become: yes
   roles:
@@ -97,15 +97,18 @@
     - rsyslog
   tags: rsyslog
 
-# ===== Int Services =====
+# ===== DNS Setup =====
 
-- name: Bind Master
-  hosts: int_serv
+- name: Bind9
+  hosts: all
   become: yes
   roles:
     - bind
     - bind_exporter
-  tags: bindmaster
+    - resolv
+  tags: bind
+
+# ===== Int Services =====
 
 - name: InfluxDB and Telegraf
   hosts: int_serv
@@ -153,21 +156,7 @@
     - nginx_exporter
   tags: ngserv
 
-- name: Resolv at Int Serv
-  hosts: int_serv
-  become: yes
-  roles:
-    - resolv
-  tags: resolvserv
-
 # ===== App Stack =====
-
-- name: Resolv at App Stack
-  hosts: app_stack
-  become: yes
-  roles:
-    - resolv
-  tags: resolvapp
 
 - name: Keepallived
   hosts: app_stack
@@ -217,10 +206,3 @@
     - nginx_exporter
   tags: ngapp
 
-- name: Bind Slaves
-  hosts: app_stack
-  become: yes
-  roles:
-    - bind
-    - bind_exporter
-  tags: bindslaves

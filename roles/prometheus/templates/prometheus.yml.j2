@@ -19,7 +19,7 @@ scrape_configs:
   - job_name: 'nginx'
     static_configs:
       - targets:
-        {% for machine in groups['int_serv'] %}- {{ machine }}:9113
+        {% for machine in groups['all'] %}- {{ machine }}:9113
         {% endfor %}
 
   - job_name: 'haproxy'

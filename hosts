@@ -1,6 +1,6 @@
-remote1 ansible_host=193.40.156.86 ansible_port=18922 ansible_ssh_user=ubuntu
-remote2 ansible_host=193.40.156.86 ansible_port=16522 ansible_ssh_user=ubuntu
-remote3 ansible_host=193.40.156.86 ansible_port=17722 ansible_ssh_user=ubuntu
+remote1 ansible_host=193.40.156.86 ansible_port=19522 ansible_ssh_user=ubuntu
+remote2 ansible_host=193.40.156.86 ansible_port=5822 ansible_ssh_user=ubuntu
+remote3 ansible_host=193.40.156.86 ansible_port=3122 ansible_ssh_user=ubuntu
 
 [web_servers]
 remote1
@@ -21,6 +21,9 @@ remote2
 remote3
 
 [influxdb]
+remote3
+
+[telegraf]
 remote3
 
 [haproxy]

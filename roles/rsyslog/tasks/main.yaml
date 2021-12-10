@@ -1,6 +1,6 @@
-- name: Copy pinger service file
-  ansible.builtin.copy:
-    src: 10-telegraf.conf
+- name: Copy rsyslog config
+  ansible.builtin.template:
+    src: 10-telegraf.conf.j2
     dest: /etc/rsyslog.d/10-telegraf.conf
   notify:
     - Restart rsyslog
