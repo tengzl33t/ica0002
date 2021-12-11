@@ -4,7 +4,7 @@ Install and configure infrastructure with Ansible:
 
 Restore MySQL agama data from the backup:
 
-    Open console with root user and type:
+    Open console on MySQL Master (not read only!) machine with root user and type:
 
     rm -rf /home/backup/restore/mysql/*
     sudo -u backup duplicity --no-encryption restore rsync://tengzl33t@backup.sus.eu//home/tengzl33t/mysql /home/backup/restore/mysql/
