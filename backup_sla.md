@@ -1,11 +1,11 @@
 Coverage:
-Databases backup only (MySQL and InfluxDB), or other services which can't be restored with ansible.
+Databases backup only (MySQL and InfluxDB) or other services which can't be restored with ansible.
 
 RPO:
-Backup every day at 21:00-21:30 UTC preferably when nobody use services. Acceptable data loss: 1 day.
+Backup creates every day at 21:00-21:45 (12:00-21:15 for MySQL and 21:30-21:45 for InfluxDB) UTC preferably when nobody use services. Acceptable data loss: 1 day.
 
 Retention:
-Backups store for 1 week, so 7 versions 1 for each day of week.
+Backups store for 2 weeks. Every sunday creates full backup, every other day only incremental.
 
 Usability checks:
 Twice a week, at tuesday and friday.

@@ -8,4 +8,12 @@
     path: /var/local/iptables.mangle
     state: restored
     table: mangle
-    
+
+- name: Install iptables persistent
+  apt:
+    name: iptables-persistent
+
+- name: Copy iptables config for persistance
+  ansible.builtin.copy:
+    src: iptables.mangle
+    dest: /etc/iptables/rules.v4

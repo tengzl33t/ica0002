@@ -3,4 +3,4 @@ $ActionQueueFileName srvrfwd # set file name, also enables disk mode
 $ActionResumeRetryCount -1 # infinite retries on insert failure
 $ActionQueueSaveOnShutdown on # save in-memory data if rsyslog shuts down
 
-*.* @{{groups['telegraf'][0]}}:6514;RSYSLOG_SyslogProtocol23Format
+*.* @influxdb:6514;RSYSLOG_SyslogProtocol23Format

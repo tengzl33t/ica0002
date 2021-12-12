@@ -54,3 +54,4 @@
     container_default_behavior: no_defaults
     volumes: /opt/grafana:/etc/grafana
     published_ports: "{{ grafana_port }}:3000"
+    restart_policy: unless-stopped
