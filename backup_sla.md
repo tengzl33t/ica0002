@@ -5,7 +5,7 @@ RPO:
 Backup creates every day at 21:00-21:45 (12:00-21:15 for MySQL and 21:30-21:45 for InfluxDB) UTC preferably when nobody use services. Acceptable data loss: 1 day.
 
 Retention:
-Backups store for 2 weeks. Every sunday creates full backup, every other day only incremental.
+Backups store for 2 weeks, could store more time, sysadmin makes a decision. Every sunday creates full backup, every other day only incremental.
 
 Usability checks:
 Twice a week, at tuesday and friday.

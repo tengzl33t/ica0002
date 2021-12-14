@@ -37,7 +37,7 @@ listen sus
     bind :88
     stats enable
     stats uri /stats
-    server agama1-1 web1:8001 check
-	server agama1-2 web1:8002 check
-    server agama2-1 web2:8001 check
-	server agama2-2 web2:8002 check
+    server agama1-1 web1:{{agama_port1}} check
+	server agama1-2 web1:{{agama_port2}} check
+    server agama2-1 web2:{{agama_port1}} check
+	server agama2-2 web2:{{agama_port2}} check

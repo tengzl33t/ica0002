@@ -16,4 +16,5 @@
   community.docker.docker_login:
     username: "{{ docker_login }}"
     password: "{{ docker_pass }}"
+  no_log: true
     

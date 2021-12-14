@@ -31,6 +31,7 @@
   shell: grafana-cli admin reset-admin-password {{grafana_admin_password}}
   notify:
     - Restart grafana
+  no_log: true
 
 - name: Pause for 10 seconds
   pause:

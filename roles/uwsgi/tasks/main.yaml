@@ -18,3 +18,4 @@
     dest: /etc/uwsgi/apps-enabled
   notify:
     - Restart uwsgi
+  no_log: true

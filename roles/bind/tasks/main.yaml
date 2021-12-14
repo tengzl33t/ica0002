@@ -12,6 +12,7 @@
     dest: /etc/bind/named.conf.options
   notify:
     - Restart bind
+  no_log: true
 
 - name: Change bind9 "db.sus" config
   when: inventory_hostname in groups['dns_master']
@@ -60,6 +61,7 @@
     value: "{{ backup_server }}"
   notify:
     - Restart bind
+  no_log: true
 
 - name: Add additional CNAME records
   when: inventory_hostname in groups['dns_master']
@@ -75,3 +77,4 @@
   notify:
     - Restart bind
   loop: "{{ dns_cname_records | dict2items }}"
+  no_log: true

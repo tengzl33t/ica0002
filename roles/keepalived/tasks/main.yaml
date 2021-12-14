@@ -1,3 +1,8 @@
+- name: Add user "keepalived_script"
+  ansible.builtin.user:
+    name: keepalived_script
+    home: /home/keepalived_script
+
 - name: Install keepalived
   apt:
     name: keepalived
@@ -11,9 +16,10 @@
 
 - name: Copy keepalived script file
   ansible.builtin.copy:
-    src: keepalived_script.sh
-    dest: /usr/local/bin/keepalived_script
-    mode: 755
+    src: vrrp_script.sh
+    dest: /home/keepalived_script/vrrp_script
+    owner: keepalived_script
+    mode: a+x
   notify:
     - Restart keepalived
 

@@ -36,18 +36,16 @@
         * ```influx -execute 'DROP DATABASE telegraf'```
         * ```sudo -u backup duplicity --no-encryption restore rsync://tengzl33t@backup.sus.eu//home/tengzl33t/influxdb/ /home/backup/restore/influxdb/```
         * ```influxd restore -portable -database telegraf /home/backup/restore/influxdb/```
+        * ```systemctl start telegraf```
 
 # Checking results:
 ## How to check restore results:
 
-* Make sure that restore commands didn't give errors,
-* Check agama restore results at agama page,
-* Check telegraf restore results at grafana syslog
+* Make sure that restore commands didn't give errors
+* Check agama restore results at agama page
+* Check telegraf restore results in InfluxDB tables, type
+    * 
 
 ## Verify that backup was successful and run ansible playbook again:
 
 ```ansible-playbook infra.yaml```
-or
-```ansible-playbook infra.yaml --tags "influx"```
-for telegraf restart
-

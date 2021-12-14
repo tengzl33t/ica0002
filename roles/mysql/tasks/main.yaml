@@ -31,6 +31,7 @@
     host: "%"
     priv: "{{ mysql_database }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
 
 - name: MySQL replication user
   community.mysql.mysql_user:
@@ -40,6 +41,7 @@
     priv: 
       '*.*': 'REPLICATION SLAVE'
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
 
 - name: MySQL replica read only
   community.mysql.mysql_variables:

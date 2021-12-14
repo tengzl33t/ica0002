@@ -10,7 +10,7 @@
   ansible.builtin.file:
     path: /etc/pinger
     state: directory
-    mode: '0755'
+    mode: 0755
 
 - name: Copy pinger shell file
   ansible.builtin.copy:
@@ -22,7 +22,7 @@
   ansible.builtin.copy:
     src: pinger.service
     dest: /etc/systemd/system/pinger.service
-    mode: a+x
+    mode: 0644
   notify:
     - Reload systemd
 

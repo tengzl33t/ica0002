@@ -8,7 +8,7 @@
   ansible.builtin.copy:
     src: keepalived_exporter.service
     dest: /etc/systemd/system/keepalived_exporter.service
-    mode: a+x
+    mode: 0644
   notify:
     - Reload systemd
 

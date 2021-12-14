@@ -12,13 +12,15 @@
     priv: 
       'agama.*': 'LOCK TABLES,SELECT'
     login_unix_socket: /var/run/mysqld/mysqld.sock
+  no_log: true
 
 - name: Change my.cnf mysql config
   ansible.builtin.template:
     src: my.cnf.j2
     dest: /home/backup/.my.cnf
     owner: backup
-    mode: 0400
+    mode: 0400 # read only
+  no_log: true
 
 - name: Copy mysql backup crontab file
   ansible.builtin.template:

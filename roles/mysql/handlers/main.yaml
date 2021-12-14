@@ -25,3 +25,4 @@
     - resetreplica
     - startreplica
   when: hostvars[inventory_hostname]['ansible_default_ipv4']['address'] != mysql_host
+  no_log: true

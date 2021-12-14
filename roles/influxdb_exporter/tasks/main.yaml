@@ -8,7 +8,7 @@
   ansible.builtin.copy:
     src: influx_exporter.service
     dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
-    mode: a+x
+    mode: 0644
   notify:
     - Reload systemd
 
