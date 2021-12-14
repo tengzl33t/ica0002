@@ -2,12 +2,6 @@
   apt:
     name: keepalived
 
-- name: Start and enable keepalived
-  ansible.builtin.service:
-    name: keepalived
-    state: started
-    enabled: yes
-
 - name: Change keepalived config
   ansible.builtin.template:
     src: keepalived.conf.j2
@@ -22,3 +16,9 @@
     mode: 755
   notify:
     - Restart keepalived
+
+- name: Start and enable keepalived
+  ansible.builtin.service:
+    name: keepalived
+    state: started
+    enabled: yes

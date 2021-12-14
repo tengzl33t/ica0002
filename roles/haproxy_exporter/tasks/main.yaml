@@ -2,15 +2,16 @@
   apt:
     name: prometheus-haproxy-exporter
 
-- name: Start and enable haproxy exporter
-  ansible.builtin.service:
-    name: prometheus-haproxy-exporter
-    state: started
-    enabled: yes
-
 - name: Change haproxy exporter config
   ansible.builtin.template:
     src: prometheus-haproxy-exporter.j2
     dest: /etc/default/prometheus-haproxy-exporter
   notify:
     - Restart haproxy exporter
+
+- name: Start and enable haproxy exporter
+  ansible.builtin.service:
+    name: prometheus-haproxy-exporter
+    state: started
+    enabled: yes
+    

@@ -2,12 +2,6 @@
   apt:
     name: prometheus
 
-- name: Start and enable prometheus
-  ansible.builtin.service:
-    name: prometheus
-    state: started
-    enabled: yes
-
 - name: Add prometheus ARGS
   ansible.builtin.template:
     src: prometheus
@@ -21,3 +15,9 @@
     dest: /etc/prometheus/prometheus.yml
   notify:
     - Restart prometheus
+
+- name: Start and enable prometheus
+  ansible.builtin.service:
+    name: prometheus
+    state: started
+    enabled: yes

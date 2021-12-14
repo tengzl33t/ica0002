@@ -45,6 +45,17 @@
                 }
               },
               "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "DOWN"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -61,7 +72,7 @@
       },
       "gridPos": {
         "h": 5,
-        "w": 6,
+        "w": 3,
         "x": 0,
         "y": 0
       },
@@ -89,14 +100,100 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": false,
-          "expr": "keepalived_vrrp_state",
+          "expr": "keepalived_vrrp_state{instance=\"remote1:9165\"}",
           "instant": true,
           "interval": "",
           "legendFormat": "{{instance}}",
           "refId": "A"
         }
       ],
-      "title": "Keepalived VRPP",
+      "title": "Keepalived VRPP (Remote1)",
+      "type": "stat"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "1": {
+                  "color": "orange",
+                  "index": 0,
+                  "text": "SLAVE"
+                },
+                "2": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "MASTER"
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "color": "red",
+                  "index": 2,
+                  "text": "DOWN"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 3,
+        "y": 0
+      },
+      "id": 28,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "8.3.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "exemplar": false,
+          "expr": "keepalived_vrrp_state{instance=\"remote2:9165\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "{{instance}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Keepalived VRPP (Remote2)",
       "type": "stat"
     },
     {
@@ -441,7 +538,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 6,
+        "w": 8,
         "x": 0,
         "y": 5
       },
@@ -464,35 +561,15 @@
       "pluginVersion": "8.3.2",
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "exemplar": true,
-          "expr": "haproxy_server_up{instance=\"remote1:9101\", server=\"agama1-1\"}",
+          "expr": "haproxy_server_up",
           "interval": "",
-          "legendFormat": "agama1-1",
+          "legendFormat": "{{instance}} {{server}}",
           "refId": "A"
-        },
-        {
-          "exemplar": true,
-          "expr": "haproxy_server_up{instance=\"remote1:9101\", server=\"agama1-2\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "agama1-2",
-          "refId": "B"
-        },
-        {
-          "exemplar": true,
-          "expr": "haproxy_server_up{instance=\"remote2:9101\", server=\"agama2-1\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "agama2-1",
-          "refId": "C"
-        },
-        {
-          "exemplar": true,
-          "expr": "haproxy_server_up{instance=\"remote2:9101\", server=\"agama2-2\"}",
-          "hide": false,
-          "interval": "",
-          "legendFormat": "agama2-2",
-          "refId": "D"
         }
       ],
       "title": "HAProxy Servers",
@@ -552,8 +629,8 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 9,
-        "x": 6,
+        "w": 7,
+        "x": 8,
         "y": 5
       },
       "id": 10,
@@ -575,7 +652,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "rate(bind_resolver_queries_total{instance=\"remote3:9119\"}[1m])",
+          "expr": "rate(bind_resolver_queries_total{instance=\"remote3:9119\", type=\"A\"}[1m])",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -661,7 +738,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "rate(bind_resolver_queries_total{instance=\"remote1:9119\"}[1m])",
+          "expr": "rate(bind_resolver_queries_total{instance=\"remote1:9119\", type=\"A\"}[1m])",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -672,7 +749,7 @@
             "uid": "PBFA97CFB590B2093"
           },
           "exemplar": true,
-          "expr": "rate(bind_resolver_queries_total{instance=\"remote2:9119\"}[1m])",
+          "expr": "rate(bind_resolver_queries_total{instance=\"remote2:9119\", type=\"A\"}[1m])",
           "hide": false,
           "interval": "",
           "legendFormat": "",

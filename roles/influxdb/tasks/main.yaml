@@ -26,14 +26,15 @@
   apt:
     name: telegraf
 
-- name: Start and enable telegraf
-  ansible.builtin.service:
-    name: telegraf
-    state: started
-    enabled: yes
-
 - name: Copy new telegraph config
   ansible.builtin.copy:
     src: telegraf.conf
     dest: /etc/telegraf/telegraf.conf
   notify: Restart telegraf
+
+- name: Start and enable telegraf
+  ansible.builtin.service:
+    name: telegraf
+    state: started
+    enabled: yes
+    

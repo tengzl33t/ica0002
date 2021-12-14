@@ -6,18 +6,18 @@
   apt:
     name: python3-pymysql
 
-- name: Start and enable mysql
-  ansible.builtin.service:
-    name: mysql
-    state: started
-    enabled: yes
-
 - name: Change mysql config
   ansible.builtin.template:
     src: override.cnf
     dest: /etc/mysql/mysql.conf.d/override.cnf
   notify:
     - Restart mysql
+
+- name: Start and enable mysql
+  ansible.builtin.service:
+    name: mysql
+    state: started
+    enabled: yes
 
 - name: MySQL database
   community.mysql.mysql_db:
