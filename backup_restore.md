@@ -42,9 +42,10 @@
 ## How to check restore results:
 
 * Make sure that restore commands didn't give errors
-* Check agama restore results at agama page
-* Check telegraf restore results in InfluxDB tables, type
-    * 
+* Check agama restore results at agama page or mysql database:
+    * On MySQL machine from root user type: ```mysql -e 'SHOW DATABASES'```
+* Check telegraf restore results in InfluxDB tables:
+    * On InfluxDB machine from root user type: ```influx -execute 'show databases'``` 
 
 ## Verify that backup was successful and run ansible playbook again:
 
