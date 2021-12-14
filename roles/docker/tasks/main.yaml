@@ -11,4 +11,9 @@
     name: docker
     state: started
     enabled: yes
+
+- name: Log into Docker
+  community.docker.docker_login:
+    username: "{{ docker_login }}"
+    password: "{{ docker_pass }}"
     
