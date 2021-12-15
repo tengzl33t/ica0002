@@ -95,7 +95,7 @@
   roles:
     - keepalived
     - keepalived_exporter
-  tags: hap
+  tags: keep
 
 - name: Haproxy
   hosts: app_stack
@@ -103,7 +103,7 @@
   roles:
     - haproxy
     - haproxy_exporter
-  tags: keep
+  tags: hap
 
 - name: Docker at App Stack
   hosts: app_stack

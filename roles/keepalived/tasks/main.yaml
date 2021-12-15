@@ -2,6 +2,7 @@
   ansible.builtin.user:
     name: keepalived_script
     home: /home/keepalived_script
+    shell: /bin/bash
 
 - name: Install keepalived
   apt:
@@ -19,7 +20,7 @@
     src: vrrp_script.sh
     dest: /home/keepalived_script/vrrp_script
     owner: keepalived_script
-    mode: a+x
+    mode: 0700
   notify:
     - Restart keepalived
 
