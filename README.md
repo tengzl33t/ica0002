@@ -1,4 +1,4 @@
-# ica0002
+# ica0002 Answers & Help
 Fully completed 2021 fall ICA0002 TalTech course code repository.
 
 All tasks are completed and exam passed.
